@@ -3,10 +3,10 @@ package abc;
 public class ABCParser {
 
 	// an ABC File to be read
-	ABCFile abcFile;
+	ABCReader abcFile;
 	
 	// BAD. this should open the file.
-	public ABCParser(ABCFile abcf) {
+	public ABCParser(ABCReader abcf) {
 		abcFile = abcf;
 	}
 	

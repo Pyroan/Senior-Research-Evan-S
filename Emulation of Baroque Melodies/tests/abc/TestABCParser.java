@@ -8,7 +8,7 @@ public class TestABCParser {
 
 	@Test
 	public void testGetMetadata() {
-		ABCFile abcfile = new ABCFile();
+		ABCReader abcfile = new ABCReader();
 		abcfile.openForReading("abc files/vivaldi-spring.abc");
 		ABCParser abcParser = new ABCParser(abcfile);
 		
