@@ -24,13 +24,4 @@ public class TestSong {
 		Song song = new Song("Spring", "Vivaldi", Tempo.ALLEGRO, "4/4");
 		assertEquals("Spring,\nBy Vivaldi", song.getMetadata());
 	}
-	
-	/**
-	 * See if we can output the metadata for the song.
-	 */
-	@Test
-	public void testGetMetadata() {
-		Song spring = new Song("abc files/vivaldi-spring.abc");
-	}
-
 }

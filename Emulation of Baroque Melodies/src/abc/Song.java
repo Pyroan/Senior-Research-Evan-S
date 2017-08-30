@@ -46,8 +46,8 @@ public class Song {
 	 * @param path
 	 */
 	public Song(String path) {
-		ABCReader abcReader = new ABCReader();
-		abcReader.openForReading(path);
+		SongBuilder abcReader = new SongBuilder();
+		abcReader.openReader(path);
 	}
 	
 	public String getMetadata() {
