@@ -6,20 +6,21 @@ package abc;
  *
  */
 public class Song {
-	
+
 	// Metadata/information fields
 	private String title; // Title of the piece
 	private String composer; // original composer
 	private Tempo tempo; // Speed the piece should be played at.
 	private String key;
-	
+
 	// The following two will be used when creating pieces
 	// to evaluate how many beats/notes should be in each measure.
 	private int[] meter = new int[2];
 	private int noteLength;
-	
+
 	// Tune Body
-//	public Note[] notes;
+	//	public Note[] notes;
+
 	
 	/*********************
 	 *    Constructors   *
@@ -37,7 +38,7 @@ public class Song {
 		meter[1]=4;
 		noteLength = 8;
 	}
-	
+
 	/**
 	 * Constructs a new song with specified attributes
 	 */
@@ -46,9 +47,10 @@ public class Song {
 		this.composer = composer;
 		this.tempo = tempo;
 		// TODO BROKE THIS
-		//this.meter = timeSignature;
+		this.meter[0] = timeSignature.charAt(0);
+		this.meter[1] = timeSignature.charAt(2);
 	}
-	
+
 	/**
 	 * Constructs an existing song from the given
 	 * pathname.
@@ -58,11 +60,11 @@ public class Song {
 		SongBuilder abcReader = new SongBuilder();
 		abcReader.openReader(path);
 	}
-	
+
 	/****************************
 	 *    Getters and Setters   *
 	 ****************************/
-	
+
 	/**
 	 * Returns just the title and composer in the form
 	 * "<Title>, by <Composer>"
@@ -71,31 +73,39 @@ public class Song {
 		String s = title + ",\nBy " + composer;
 		return s;
 	}
-	
+
 	public String getTitle() {
 		return title;
 	}
-	
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
+
 	public String getComposer() {
 		return composer;
 	}
-	
+
 	public void setComposer(String comp) {
 		composer = comp;
 	}
-	
+
 	public void setTempo(Tempo tempo) {
 		this.tempo = tempo;
 	}
-	
+
+	public String getKey() {
+		return key;
+	}
+
 	public void setKey(String key) {
 		this.key = key;
 	}
-	
+
+	public String getNoteLength() {
+		return "1/"+noteLength;
+	}
+
 	/**
 	 * Sets the note length based on a string instead
 	 * of an int, converting it.
@@ -110,13 +120,28 @@ public class Song {
 			noteLength = noteLength.substring(2);
 		}
 	}
-	
+
 	public void setNoteLength(int noteLength) {
 		this.noteLength = noteLength;
 	}
-	
+
 	public void setTimeSignature(String ts) {
 		// reminder meter isn't a string anymore;
 		//meter = ts;
+	}
+
+	/**
+	 * Sets the meter. Assumes the string being passed to it
+	 * is of the form "X/Y" or "C" for common time.
+	 * @param meter
+	 */
+	public void setMeter(String meter) {
+		if (meter == "C") {
+			this.meter[0] = 4;
+			this.meter[1] = 4;
+		} else {
+			this.meter[0] = meter.charAt(0);
+			this.meter[2] = meter.charAt(0);
+		}
 	}
 }

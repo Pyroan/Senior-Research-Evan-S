@@ -30,16 +30,6 @@ public class TestSongBuilder {
 		assertTrue(abcReader.closeReader());
 	}
 	
-	/**
-	 * Tests our ability to split up the header into information fields
-	 */
-	@Ignore
-	@Test
-	public void testProcessHeader() {
-		SongBuilder songBuilder = new SongBuilder();
-		Song s = songBuilder.buildSong("abc files/vivaldi-spring.abc");
-		assertEquals("Spring,\nBy Vivaldi", s.getTitleAndComposer());
-	}
 	
 	/**
 	 * THIS IS NOT DONE.
@@ -49,6 +39,9 @@ public class TestSongBuilder {
 		SongBuilder sB = new SongBuilder();
 		Song s = sB.buildSong("abc files/vivaldi-spring.abc");
 		assertEquals("Spring", s.getTitle());
+		assertEquals("Vivaldi", s.getComposer());
+		assertEquals("E", s.getKey());
+		assertEquals("1/8", s.getNoteLength());
 	}
 	
 	/**

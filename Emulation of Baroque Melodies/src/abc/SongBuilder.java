@@ -86,7 +86,7 @@ public class SongBuilder {
 				song.setTimeSignature(infoField[1]);
 			// Tempo
 			case "Q":
-				//TODO Tempo requires some additional processing.
+				//TODO Tempo requires some additional processing. Maybe I should get rid of it
 				break;
 			case "K":
 				song.setKey(infoField[1]);
