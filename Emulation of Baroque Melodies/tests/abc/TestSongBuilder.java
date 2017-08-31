@@ -41,10 +41,13 @@ public class TestSongBuilder {
 		assertEquals("Spring,\nBy Vivaldi", s.getMetadata());
 	}
 	
-	@Ignore
+	/**
+	 * THIS IS NOT DONE.
+	 */
 	@Test
 	public void testBuildSong() {
-		fail("Not yet implemented");
+		SongBuilder sB = new SongBuilder();
+		Song s = sB.buildSong("abc files/vivaldi-spring.abc");
 	}
 	
 	/**

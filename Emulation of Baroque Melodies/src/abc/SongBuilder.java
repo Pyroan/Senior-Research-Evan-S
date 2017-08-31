@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.regex.Matcher;
 
 /**
  * Represents an ABC notation music file (.abc)
@@ -15,12 +16,12 @@ public class SongBuilder {
 
 	// BufferedReader for reading the file.
 	private BufferedReader buffRead;
-	
+
 	// The header of the file, containing Information Fields (metadata)
-	private String header;
+	private String header = "";
 	// The body of the file, containing the tune.
-	private String body;
-	
+	private String body = "";
+
 	/**
 	 * Builds a song from a specified file.
 	 * @param path
@@ -31,17 +32,39 @@ public class SongBuilder {
 		if (!openReader(path))
 			return null;
 		// Now we know that works, attempt to create the song.
-		
+
 		Song song = new Song();
+
+		// Creates header and body strings to prepare them
+		// for further processing.
+		try {
+			// Read the entire header.
+			String s = buffRead.readLine();
+			while (s.matches("[A-Za-z]:.*")) {
+				header += s + "\n";
+				s = buffRead.readLine();
+			}
+			// Read the rest of the file.
+			while (buffRead.ready()) {
+				body += buffRead.readLine();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		// Close the reader, freeing memory
+		closeReader();
 		
-		// TODO Create header and body.
+		// ugly print test TODO Remove this
+		System.out.println("HEADER\n" + header);
+		System.out.println();
+		System.out.println("BODY\n" + body);
 		
 		processHeader(song);
 		processBody(song);
-		
+
 		return song;
 	}
-	
+
 	/**
 	 * Breaks down the header into its information fields
 	 * and fills song's instance variables with their values.
@@ -50,7 +73,7 @@ public class SongBuilder {
 	private void processHeader(Song song) {
 		//TODO build this.
 	}
-	
+
 	/**
 	 * Breaks down the body into its notes and "other stuff"
 	 * and fills the song's instance variables with their values.
@@ -58,7 +81,7 @@ public class SongBuilder {
 	private void processBody(Song song) {
 		//TODO build this.
 	}
-	
+
 	/**
 	 * Attempts to open the specified file for reading
 	 * @param path - the path to the requested file
@@ -74,7 +97,7 @@ public class SongBuilder {
 			return false;
 		}
 	}
-	
+
 	/**
 	 * Frees resources by closing the BufferedReader
 	 * @return true if successfully closed the buffer.
@@ -92,5 +115,5 @@ public class SongBuilder {
 			return false;
 		}
 	}
-	
+
 }
