@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.regex.Matcher;
+import java.util.Scanner;
 
 /**
  * Represents an ABC notation music file (.abc)
@@ -54,11 +54,6 @@ public class SongBuilder {
 		// Close the reader, freeing memory
 		closeReader();
 		
-		// ugly print test TODO Remove this
-		System.out.println("HEADER\n" + header);
-		System.out.println();
-		System.out.println("BODY\n" + body);
-		
 		processHeader(song);
 		processBody(song);
 
@@ -71,7 +66,40 @@ public class SongBuilder {
 	 * @param song
 	 */
 	private void processHeader(Song song) {
-		//TODO build this.
+		Scanner lineReader = new Scanner(header);
+		while (lineReader.hasNext()) {
+			String line = lineReader.nextLine();
+			// Break up a line into the category and the value
+			String[] infoField = line.split(":");
+			
+			switch(infoField[0]) {
+			// Title
+			case "T":
+				song.setTitle(infoField[1]);
+				break;
+			// Composer
+			case "C":
+				song.setComposer(infoField[1]);
+				break;
+			// Meter
+			case "M":
+				song.setTimeSignature(infoField[1]);
+			// Tempo
+			case "Q":
+				//TODO Tempo requires some additional processing.
+				break;
+			case "K":
+				song.setKey(infoField[1]);
+				break;
+			case "L":
+				song.setNoteLength(infoField[1]);
+				break;
+			// We'll ignore other values for now.
+			default:
+				break;
+			}
+		}
+		lineReader.close();
 	}
 
 	/**

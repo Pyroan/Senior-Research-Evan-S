@@ -12,8 +12,8 @@ public class TestSong {
 	@Test
 	public void testDefaultConstructor() {
 		Song song = new Song();
-		assertNotEquals("Spring, By Vivaldi", song.getMetadata());
-		assertEquals("Untitled,\nBy Unnamed", song.getMetadata());
+		assertNotEquals("Spring, By Vivaldi", song.getTitleAndComposer());
+		assertEquals("Untitled,\nBy Unnamed", song.getTitleAndComposer());
 	}
 	
 	/**
@@ -22,6 +22,6 @@ public class TestSong {
 	@Test
 	public void testSpecifiedConsructor() {
 		Song song = new Song("Spring", "Vivaldi", Tempo.ALLEGRO, "4/4");
-		assertEquals("Spring,\nBy Vivaldi", song.getMetadata());
+		assertEquals("Spring,\nBy Vivaldi", song.getTitleAndComposer());
 	}
 }

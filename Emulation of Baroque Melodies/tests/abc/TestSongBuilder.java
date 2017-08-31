@@ -38,7 +38,7 @@ public class TestSongBuilder {
 	public void testProcessHeader() {
 		SongBuilder songBuilder = new SongBuilder();
 		Song s = songBuilder.buildSong("abc files/vivaldi-spring.abc");
-		assertEquals("Spring,\nBy Vivaldi", s.getMetadata());
+		assertEquals("Spring,\nBy Vivaldi", s.getTitleAndComposer());
 	}
 	
 	/**
@@ -48,6 +48,7 @@ public class TestSongBuilder {
 	public void testBuildSong() {
 		SongBuilder sB = new SongBuilder();
 		Song s = sB.buildSong("abc files/vivaldi-spring.abc");
+		assertEquals("Spring", s.getTitle());
 	}
 	
 	/**
