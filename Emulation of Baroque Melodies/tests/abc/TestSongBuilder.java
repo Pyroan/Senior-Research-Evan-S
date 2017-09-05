@@ -38,10 +38,13 @@ public class TestSongBuilder {
 	public void testBuildSong() {
 		SongBuilder sB = new SongBuilder();
 		Song s = sB.buildSong("abc files/vivaldi-spring.abc");
+		// Test header
 		assertEquals("Spring", s.getTitle());
 		assertEquals("Vivaldi", s.getComposer());
 		assertEquals("E", s.getKey());
 		assertEquals("1/8", s.getNoteLength());
+		// Test body
+		
 	}
 	
 	/**

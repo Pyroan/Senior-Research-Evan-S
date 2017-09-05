@@ -46,7 +46,6 @@ public class Song {
 		this.title = title;
 		this.composer = composer;
 		this.tempo = tempo;
-		// TODO BROKE THIS
 		this.meter[0] = timeSignature.charAt(0);
 		this.meter[1] = timeSignature.charAt(2);
 	}
