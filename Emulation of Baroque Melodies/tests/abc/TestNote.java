@@ -41,11 +41,31 @@ public class TestNote {
 	
 	/**
 	 * Length almost definitely requires more processing
+	 * so it can handle "/"
 	 */
 	@Test
 	public void setLength() {
 		Note note = new Note();
 		assertTrue(note.setLength(3));
+	}
+	
+	@Test
+	public void testToString() {
+		Note note = new Note();
+		note.setAccidental("^");
+		note.setPitch("G");
+		note.setOctave(3);
+		note.setLength(3);
+		assertEquals("^g''3", note.toString());
+	}
+	
+	@Test
+	public void testConstructor() {
+		Note note = new Note("^g'3");
+		assertEquals('G', note.getPitch());
+		assertEquals(2, note.getOctave());
+		assertEquals(3, note.getLength());
+		assertEquals('^', note.getAccidental());
 	}
 
 }
