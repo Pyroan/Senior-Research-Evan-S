@@ -17,7 +17,7 @@ public class Note {
 	char accidental;
 
 	/**
-	 * Can be A-G or a-g
+	 * Can be A-G
 	 */
 	char pitch;
 
@@ -27,7 +27,7 @@ public class Note {
 	 * An octave of n is n octaves above
 	 * or below octave 0.
 	 */
-	int octave;
+	int octave=0;
 
 	/**
 	 * The length of a note, where units
@@ -38,39 +38,55 @@ public class Note {
 
 	/**
 	 * Initialize all values given a string.
+	 * Reminder: This is the note regex:
+	 * ([\^=_]?[a-gA-G][,']*|z)[\d/]?
 	 */
 	public Note(String note) {
+		// PARSE BABY PARSE
+		// This is gonna be stupid.
+		int i = 0;
+		if (setAccidental(note.charAt(i)+"")) i++;
+		if (setPitch(note.charAt(i)+"")) i++;
+		while(note.charAt(i)=='\''||note.charAt(i)==','){
+			if (note.charAt(i)=='\'') {
+				octave++;
+				i++;
+			} else if (note.charAt(i)==',') {
+				octave--;
+				i++;
+			}
+		}
+		// TODO handle length;
 		
 	}
-	
+
 	/**
 	 *  Want to preserve the default constructor
 	 *  so I can hand-build notes as required.
 	 */
 	public Note() {};
-	
+
 	/***********************
 	 *   Getters/Setters   *
 	 ***********************/
-	
+
 	/**
 	 * Accidental
 	 */
 	public char getAccidental() {
 		return accidental;
 	}
-	
+
 	/**
 	 * @return true if S is a valid accidental,
 	 * false otherwise.
 	 */
 	public boolean setAccidental(String s) {
-		if (s == "^" || s == "=" || s == "_") {
+		if (s.equals("^")||s.equals("=")||s.equals("_")) {
 			accidental = s.charAt(0);
 			return true;
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	/**
@@ -79,7 +95,7 @@ public class Note {
 	public char getPitch() {
 		return pitch;
 	}
-	
+
 	public boolean setPitch(String s) {
 		if (s.matches("[A-G]|z")) {
 			pitch = s.charAt(0);
@@ -93,14 +109,14 @@ public class Note {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Octave
 	 */
 	public int getOctave() {
 		return octave;
 	}
-	
+
 	public boolean setOctave(int n) {
 		octave = n;
 		return true;
@@ -112,12 +128,12 @@ public class Note {
 	public int getLength() {
 		return length;
 	}
-	
+
 	public boolean setLength(int n) {
 		length = n;
 		return true;
 	}
-	
+
 	/**
 	 * Process a string representation of length,
 	 * mainly one that contains one or more "/"
@@ -128,14 +144,23 @@ public class Note {
 		//TODO implement setLength
 		return false;
 	}
-	
-	
+
+
 	/**
-	 * TODO: This
+	 * TODO: Finish This
 	 * Returns this note written in its proper 
 	 * abc notation format.
 	 */
 	public String toString() {
+		String note = "";
+		note += getAccidental();
+		// handling stuff for different octaves
+		// completely sucks.
+		if (getOctave() >= 1)
+		{
+			//pitch += 
+		}
+		note += getPitch();
 		return "";
 	}
 }
