@@ -2,6 +2,8 @@ package abc;
 
 import static org.junit.Assert.*;
 
+import java.awt.Point;
+
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -47,7 +49,7 @@ public class TestNote {
 	@Test
 	public void setLength() {
 		Note note = new Note();
-		assertTrue(note.setLength(3));
+		assertTrue(note.setLength(3, 1));
 	}
 	
 	@Ignore
@@ -57,7 +59,7 @@ public class TestNote {
 		note.setAccidental("^");
 		note.setPitch("G");
 		note.setOctave(3);
-		note.setLength(3);
+		note.setLength(3, 1);
 		assertEquals("^g''3", note.toString());
 		
 		Note note2 = new Note("_G,/");
@@ -109,21 +111,22 @@ public class TestNote {
 	@Test
 	public void testLength() {
 		Note note = new Note("G3");
-		assertEquals(3, note.getLength());
+		assertEquals(new Point(3,1), note.getLength());
 		note = new Note("G/");
-		assertEquals(-1, note.getLength());
+		assertEquals(new Point(1,2), note.getLength());
 		note = new Note("F//");
-		assertEquals(-2, note.getLength());
+		assertEquals(new Point(1,4), note.getLength());
+		note = new Note("F/3");
+		assertEquals(new Point(3,2), note.getLength());
 	}
 	
-	@Ignore
 	@Test
 	public void testCompleteNote() {
 		// Testing a full note
 		Note note = new Note("^g'3");
 		assertEquals('G', note.getPitch());
 		assertEquals(2, note.getOctave());
-		assertEquals(3, note.getLength());
+		assertEquals(new Point(3, 1), note.getLength());
 		assertEquals('^', note.getAccidental());
 	}
 

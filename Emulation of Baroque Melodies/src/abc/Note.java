@@ -1,5 +1,7 @@
 package abc;
 
+import java.awt.Point;
+
 /**
  * Represents a single note in a tune.
  * 
@@ -33,8 +35,11 @@ public class Note {
 	 * The length of a note, where units
 	 * are the default note length of the tune.
 	 * A length of -n is equal to 1/(2n)
+	 * Wait in general it's gonna be n/m
+	 * where n is 1xthe number and m is
+	 * 2xnumber of slashes?
 	 */
-	int length=1;
+	Point length = new Point(1,1);
 
 	/**
 	 * Initialize all values given a string.
@@ -66,11 +71,10 @@ public class Note {
 		// Notation. There has to be some secret thing I don't know about.
 		while (pos<note.length() && note.substring(pos).matches("[\\d\\/]*")) {
 			if (note.charAt(pos) == '/') {
-				length--;
+				length.y *= 2;
 			} else {
-				System.out.println(note.charAt(pos));
-				if (length==0) length++;
-				length *= note.charAt(pos)-48;
+				System.out.println(note.charAt(pos));;
+				length.x *= note.charAt(pos)-48;
 			}
 			pos++;
 		}
@@ -141,12 +145,13 @@ public class Note {
 	/**
 	 * Length
 	 */
-	public int getLength() {
+	public Point getLength() {
 		return length;
 	}
 
-	public boolean setLength(int n) {
-		length = n;
+	public boolean setLength(int n, int m) {
+		length.x=n;
+		length.y=m;
 		return true;
 	}
 
