@@ -21,7 +21,7 @@ public class TestSong {
 	 */
 	@Test
 	public void testSpecifiedConsructor() {
-		Song song = new Song("Spring", "Vivaldi", Tempo.ALLEGRO, "4/4");
+		Song song = new Song("Spring", "Vivaldi", "4/4");
 		assertEquals("Spring,\nBy Vivaldi", song.getTitleAndComposer());
 	}
 }

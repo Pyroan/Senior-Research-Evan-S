@@ -52,20 +52,6 @@ public class TestNote {
 		assertTrue(note.setLength(3, 1));
 	}
 	
-	@Ignore
-	@Test
-	public void testToString() {
-		Note note = new Note();
-		note.setAccidental("^");
-		note.setPitch("G");
-		note.setOctave(3);
-		note.setLength(3, 1);
-		assertEquals("^g''3", note.toString());
-		
-		Note note2 = new Note("_G,/");
-		assertEquals("_G,/", note2.toString());
-	}
-	
 	@Test
 	public void testBasicNote() {
 		Note note;
@@ -97,7 +83,7 @@ public class TestNote {
 		assertEquals(0, note.getOctave());		
 		note = new Note("B,");
 		assertEquals(-1, note.getOctave());
-		// Slightly more complicated exmaples.
+		// Slightly more complicated examples.
 		note = new Note("c'''");
 		assertEquals(4, note.getOctave());
 		note = new Note("D,,,");
@@ -128,6 +114,19 @@ public class TestNote {
 		assertEquals(2, note.getOctave());
 		assertEquals(new Point(3, 1), note.getLength());
 		assertEquals('^', note.getAccidental());
+	}
+	
+	@Test
+	public void testToString() {
+		Note note = new Note();
+		note.setAccidental("^");
+		note.setPitch("G");
+		note.setOctave(3);
+		note.setLength(3, 1);
+		assertEquals("^g''3", note.toString());
+		
+		Note note2 = new Note("_G,/");
+		assertEquals("_G,/", note2.toString());
 	}
 
 }

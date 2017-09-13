@@ -84,13 +84,11 @@ public class SongBuilder {
 			// Meter
 			case "M":
 				song.setTimeSignature(infoField[1]);
-			// Tempo
-			case "Q":
-				//TODO Tempo requires some additional processing. Maybe I should get rid of it
-				break;
+			// Key
 			case "K":
 				song.setKey(infoField[1]);
 				break;
+			// Unit note length
 			case "L":
 				song.setNoteLength(infoField[1]);
 				break;

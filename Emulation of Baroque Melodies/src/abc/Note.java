@@ -64,16 +64,11 @@ public class Note {
 				pos++;
 			}
 		}
-		// TODO handle length;
-		// Future Evan: Length is really confusing.
-		// It'd be nice to keep it as a fraction or something,
-		// But i worry about converting that fraction back to
-		// Notation. There has to be some secret thing I don't know about.
+		// Length
 		while (pos<note.length() && note.substring(pos).matches("[\\d\\/]*")) {
 			if (note.charAt(pos) == '/') {
 				length.y *= 2;
 			} else {
-				System.out.println(note.charAt(pos));;
 				length.x *= note.charAt(pos)-48;
 			}
 			pos++;
@@ -156,32 +151,35 @@ public class Note {
 	}
 
 	/**
-	 * Process a string representation of length,
-	 * mainly one that contains one or more "/"
-	 * @param n
-	 * @return
-	 */
-	public boolean setLength(String n) {
-		//TODO implement setLength
-		return false;
-	}
-
-
-	/**
-	 * TODO: Finish This
 	 * Returns this note written in its proper 
 	 * abc notation format.
 	 */
 	public String toString() {
 		String note = "";
+		//Accidental
 		note += getAccidental();
-		// handling stuff for different octaves
-		// completely sucks.
-		if (getOctave() >= 1)
-		{
-			//pitch += 
+		//Octave/Pitch
+		if (octave != 0) {
+			if (octave>0) {
+				note += (char)(pitch+32);
+				for (int i = octave-1; i>0; i--) {
+					note +="'";
+				}
+			} else {
+				note += getPitch();
+				for (int i = octave; i < 0; i++) {
+					note+=",";
+				}
+			}
+		} else {
+			note += getPitch();
 		}
-		note += getPitch();
-		return "";
+		//Length
+		for (int i=1; i < length.y;i+=2) {
+			note +="/";
+		}
+		if (length.x != 1) 
+			note += length.x;
+		return note;
 	}
 }

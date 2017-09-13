@@ -10,7 +10,6 @@ public class Song {
 	// Metadata/information fields
 	private String title; // Title of the piece
 	private String composer; // original composer
-	private Tempo tempo; // Speed the piece should be played at.
 	private String key;
 
 	// The following two will be used when creating pieces
@@ -32,7 +31,6 @@ public class Song {
 	public Song() {
 		title = "Untitled";
 		composer = "Unnamed";
-		tempo = Tempo.ANDANTE;
 		key = "C";
 		meter[0]=4; 
 		meter[1]=4;
@@ -42,10 +40,9 @@ public class Song {
 	/**
 	 * Constructs a new song with specified attributes
 	 */
-	public Song(String title, String composer, Tempo tempo, String timeSignature) {
+	public Song(String title, String composer, String timeSignature) {
 		this.title = title;
 		this.composer = composer;
-		this.tempo = tempo;
 		this.meter[0] = timeSignature.charAt(0);
 		this.meter[1] = timeSignature.charAt(2);
 	}
@@ -87,10 +84,6 @@ public class Song {
 
 	public void setComposer(String comp) {
 		composer = comp;
-	}
-
-	public void setTempo(Tempo tempo) {
-		this.tempo = tempo;
 	}
 
 	public String getKey() {
