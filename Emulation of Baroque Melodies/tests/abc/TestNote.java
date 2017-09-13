@@ -65,7 +65,61 @@ public class TestNote {
 	}
 	
 	@Test
-	public void testConstructor() {
+	public void testBasicNote() {
+		Note note;
+		// testing a note that's just a pitch.
+		note = new Note("G");
+		assertEquals('G', note.getPitch());
+		note = new Note("f");
+		assertEquals('F', note.getPitch());
+		note = new Note("H");
+		assertNotEquals('H', note.getPitch());
+	}
+	
+	@Test
+	public void testNoteWithAccidental() {
+		Note note = new Note("^G");
+		assertEquals('^', note.getAccidental());
+		assertEquals('G', note.getPitch());
+		note = new Note("xG");
+		assertNotEquals('x', note.getAccidental());
+	}
+	
+	@Test
+	public void testNoteWithOctave() {
+		Note note = new Note("G'");
+		assertEquals(1, note.getOctave());
+		note = new Note("f");
+		assertEquals(1, note.getOctave());
+		note = new Note("A");
+		assertEquals(0, note.getOctave());		
+		note = new Note("B,");
+		assertEquals(-1, note.getOctave());
+		// Slightly more complicated exmaples.
+		note = new Note("c'''");
+		assertEquals(4, note.getOctave());
+		note = new Note("D,,,");
+		assertEquals(-3, note.getOctave());
+		note = new Note("E'',,"); // this should never happen but...
+		assertEquals(0, note.getOctave());
+		note = new Note("F,,'''");
+		assertEquals(1, note.getOctave());
+	}
+	
+	@Test
+	public void testLength() {
+		Note note = new Note("G3");
+		assertEquals(3, note.getLength());
+		note = new Note("G/");
+		assertEquals(-1, note.getLength());
+		note = new Note("F//");
+		assertEquals(-2, note.getLength());
+	}
+	
+	@Ignore
+	@Test
+	public void testCompleteNote() {
+		// Testing a full note
 		Note note = new Note("^g'3");
 		assertEquals('G', note.getPitch());
 		assertEquals(2, note.getOctave());

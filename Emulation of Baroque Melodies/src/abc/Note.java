@@ -34,30 +34,46 @@ public class Note {
 	 * are the default note length of the tune.
 	 * A length of -n is equal to 1/(2n)
 	 */
-	int length;
+	int length=1;
 
 	/**
 	 * Initialize all values given a string.
 	 * Reminder: This is the note regex:
-	 * ([\^=_]?[a-gA-G][,']*|z)[\d/]?
+	 * ([\^=_]?[a-gA-G][,']*|z)[\d\/]*
 	 */
 	public Note(String note) {
 		// PARSE BABY PARSE
 		// This is gonna be stupid.
-		int i = 0;
-		if (setAccidental(note.charAt(i)+"")) i++;
-		if (setPitch(note.charAt(i)+"")) i++;
-		while(note.charAt(i)=='\''||note.charAt(i)==','){
-			if (note.charAt(i)=='\'') {
+		int pos = 0;
+		// Accidental
+		if (setAccidental(note.charAt(pos)+"") && pos<note.length()) pos++;
+		// Pitch
+		if (setPitch(note.charAt(pos)+"") && pos<note.length()) pos++;
+		// Octave
+		while(pos < note.length() && (note.charAt(pos)=='\''||note.charAt(pos)==',')){
+			if (note.charAt(pos)=='\'') {
 				octave++;
-				i++;
-			} else if (note.charAt(i)==',') {
+				pos++;
+			} else if (note.charAt(pos)==',') {
 				octave--;
-				i++;
+				pos++;
 			}
 		}
 		// TODO handle length;
-		
+		// Future Evan: Length is really confusing.
+		// It'd be nice to keep it as a fraction or something,
+		// But i worry about converting that fraction back to
+		// Notation. There has to be some secret thing I don't know about.
+		while (pos<note.length() && note.substring(pos).matches("[\\d\\/]*")) {
+			if (note.charAt(pos) == '/') {
+				length--;
+			} else {
+				System.out.println(note.charAt(pos));
+				if (length==0) length++;
+				length *= note.charAt(pos)-48;
+			}
+			pos++;
+		}
 	}
 
 	/**
