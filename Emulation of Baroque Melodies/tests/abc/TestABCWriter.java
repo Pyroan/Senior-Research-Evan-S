@@ -9,7 +9,7 @@ import org.junit.Test;
 public class TestABCWriter {
 
 	@Test
-	public void testWriting() {
+	public void testWriteSong() {
 		SongBuilder b = new SongBuilder();
 		Song s = b.buildSong("abc files/vivaldi-spring.abc");
 		assertNotNull(s); // Double check that worked.
@@ -18,7 +18,7 @@ public class TestABCWriter {
 		// This seems like a terrible, horrible, no good, very bad idea.
 		ABCWriter writer = new ABCWriter();
 		writer.setWriter(new File("output tests/vivaldi-spring.abc"));
-		writer.writeSong(s);
+		writer.writeSong(s, true);
 		writer.closeWriter();
 
 		Song s2 = b.buildSong("output tests/vivaldi-spring.abc");
@@ -28,6 +28,19 @@ public class TestABCWriter {
 		for (int i = 0; i < s.notes.length; i++) {
 			assertEquals(s.notes[i].toString(), s2.notes[i].toString());
 		}
+	}
+	
+	@Test
+	public void testWriteSongNoFile() {
+		SongBuilder b = new SongBuilder();
+		Song s = b.buildSong("abc files/vivaldi-spring.abc");
+		ABCWriter writer = new ABCWriter();
+		writer.setDefaultDirectory("output tests");
+		writer.writeSong(s, false);
+		writer.closeWriter();
+		File f = new File("output tests/vivaldi-spring-1.abc");
+		assertTrue(f.exists());
+		assertTrue(f.delete());
 	}
 
 	@Test
@@ -46,21 +59,28 @@ public class TestABCWriter {
 
 	@Test
 	public void testSetWriterNoFile() {
-		SongBuilder b = new SongBuilder();
-		Song s = b.buildSong("abc files/vivaldi-spring.abc");
 		ABCWriter writer = new ABCWriter();
 		assertTrue(writer.setWriter((File)null));
+		File f = new File("This is just a test");
+		assertTrue(writer.setWriter(f));
+		assertTrue(writer.setWriter((File)null));
+		f.delete();
 	}
 	
 	@Test
 	public void testBuildFileName() {
+		// Assure junk files from other tests don't exist.
+		File f = new File("output tests/vivaldi-spring-1.abc");
+		if (f.exists())
+			f.delete();
+		
 		SongBuilder b = new SongBuilder();
 		Song s = b.buildSong("abc files/vivaldi-spring.abc");
 		ABCWriter writer =new ABCWriter();
 		String dd = "output tests";
 		writer.setDefaultDirectory(dd);
-		assertEquals("output tests/vivaldi-spring.abc", writer.buildFileName(s, false));
-		assertEquals("output tests/vivaldi-spring-1.abc", writer.buildFileName(s, true));
+		assertEquals("output tests/vivaldi-spring.abc", writer.buildFileName(s, true));
+		assertEquals("output tests/vivaldi-spring-1.abc", writer.buildFileName(s, false));
 	}
 
 }

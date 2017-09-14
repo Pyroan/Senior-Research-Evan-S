@@ -18,10 +18,12 @@ public class ABCWriter {
 	/**
 	 * Writes the song to the PrintStream.
 	 * @param song The song to be written.
+	 * @param overwrite True if writer should be allowed
+	 * to overwrite an existing file.
 	 */
-	public void writeSong(Song song) {
+	public void writeSong(Song song, boolean overwrite) {
 		if (writer == null) {
-			File f = new File(buildFileName(song, false));
+			File f = new File(buildFileName(song, overwrite));
 			try {
 				FileOutputStream fos = new FileOutputStream(f);
 				writer = new PrintStream(fos, true);
@@ -54,7 +56,7 @@ public class ABCWriter {
 		String title = song.getTitle().toLowerCase();
 		title.replaceAll(" ", "_");
 		path = defaultDirectory+"/"+composer + "-" + title + ".abc";
-		if (overwrite) {
+		if (!overwrite) {
 			int count = 0;
 			while (new File(path).exists()) {
 				count++;
