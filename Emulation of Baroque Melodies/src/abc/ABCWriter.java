@@ -13,12 +13,22 @@ import java.io.*;
  */
 public class ABCWriter {
 	PrintStream writer;
-	
+	String defaultDirectory = "";
+	 
 	/**
 	 * Writes the song to the PrintStream.
 	 * @param song The song to be written.
 	 */
 	public void writeSong(Song song) {
+		if (writer == null) {
+			File f = new File(buildFileName(song, false));
+			try {
+				FileOutputStream fos = new FileOutputStream(f);
+				writer = new PrintStream(fos, true);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
 		writer.println("X:1"); // Just a thing ABC files require.
 		writer.println("T:"+song.getTitle());
 		writer.println("C:"+song.getComposer());
@@ -30,11 +40,44 @@ public class ABCWriter {
 	}
 	
 	/**
+	 * Builds a filename using the Song's title
+	 * and composer data.
+	 * @param song
+	 * @param overwrite Set to true if this is allowed
+	 * to overwrite existing files.
+	 * @return
+	 */
+	public String buildFileName(Song song, boolean overwrite) {
+		String path = "";
+		String composer = song.getComposer().toLowerCase();
+		composer.replaceAll(" ", "_");
+		String title = song.getTitle().toLowerCase();
+		title.replaceAll(" ", "_");
+		path = defaultDirectory+"/"+composer + "-" + title + ".abc";
+		if (overwrite) {
+			int count = 0;
+			while (new File(path).exists()) {
+				count++;
+				path = defaultDirectory+"/"+composer+"-"+title+"-"+count+".abc";
+			}
+		}
+		return path;
+	}
+	
+	/**
 	 * If no writer is open, opens a new writer
 	 * with the given File. Otherwise, replaces
 	 * the current writer with a new one.
+	 * If the File is null, it sets the writer to null
+	 * Which will make it create its own file on a
+	 * writeSong() call.
 	 */
 	public boolean setWriter(File f) {
+		if (f == null) {
+			if (writer != null)
+				closeWriter();
+			return true;
+		}
 		try {
 			FileOutputStream fos = new FileOutputStream(f);
 			writer = new PrintStream(fos, true);
@@ -59,6 +102,10 @@ public class ABCWriter {
 	 */
 	public void closeWriter() {
 		writer.close();
+	}
+	
+	public void setDefaultDirectory(String s) {
+		defaultDirectory = s;
 	}
 	
 }

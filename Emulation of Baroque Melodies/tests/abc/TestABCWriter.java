@@ -8,7 +8,6 @@ import org.junit.Test;
 
 public class TestABCWriter {
 
-	// TODO not done yet.
 	@Test
 	public void testWriting() {
 		SongBuilder b = new SongBuilder();
@@ -21,7 +20,7 @@ public class TestABCWriter {
 		writer.setWriter(new File("output tests/vivaldi-spring.abc"));
 		writer.writeSong(s);
 		writer.closeWriter();
-		
+
 		Song s2 = b.buildSong("output tests/vivaldi-spring.abc");
 		assertNotNull(s2);
 		// Can't compare by reference so...
@@ -30,19 +29,38 @@ public class TestABCWriter {
 			assertEquals(s.notes[i].toString(), s2.notes[i].toString());
 		}
 	}
-	
+
 	@Test
 	public void testSetWriterWithPrintStream() {
 		ABCWriter writer = new ABCWriter();
 		assertTrue(writer.setWriter(System.out));
 		writer.closeWriter();
 	}
-	
+
 	@Test
 	public void testSetWriterWithFile() {
 		ABCWriter writer = new ABCWriter();
 		assertTrue(writer.setWriter(new File("output tests/temp.abc")));
 		writer.closeWriter();
+	}
+
+	@Test
+	public void testSetWriterNoFile() {
+		SongBuilder b = new SongBuilder();
+		Song s = b.buildSong("abc files/vivaldi-spring.abc");
+		ABCWriter writer = new ABCWriter();
+		assertTrue(writer.setWriter((File)null));
+	}
+	
+	@Test
+	public void testBuildFileName() {
+		SongBuilder b = new SongBuilder();
+		Song s = b.buildSong("abc files/vivaldi-spring.abc");
+		ABCWriter writer =new ABCWriter();
+		String dd = "output tests";
+		writer.setDefaultDirectory(dd);
+		assertEquals("output tests/vivaldi-spring.abc", writer.buildFileName(s, false));
+		assertEquals("output tests/vivaldi-spring-1.abc", writer.buildFileName(s, true));
 	}
 
 }
