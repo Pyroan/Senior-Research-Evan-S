@@ -18,7 +18,7 @@ public class Song {
 	private int noteLength;
 
 	// Tune Body
-	//	public Note[] notes;
+	public Note[] notes;
 
 	
 	/*********************
@@ -39,6 +39,8 @@ public class Song {
 
 	/**
 	 * Constructs a new song with specified attributes
+	 * FIXME this may not be necessary. 
+	 * Depends on whether the bot needs it to create new songs.
 	 */
 	public Song(String title, String composer, String timeSignature) {
 		this.title = title;
@@ -51,6 +53,7 @@ public class Song {
 	 * Constructs an existing song from the given
 	 * pathname.
 	 * @param path
+	 * FIXME this may be deprecated.
 	 */
 	public Song(String path) {
 		SongBuilder abcReader = new SongBuilder();

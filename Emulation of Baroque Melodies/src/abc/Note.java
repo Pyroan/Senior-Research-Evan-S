@@ -157,7 +157,8 @@ public class Note {
 	public String toString() {
 		String note = "";
 		//Accidental
-		note += getAccidental();
+		if (accidental != '\u0000')
+			note += getAccidental();
 		//Octave/Pitch
 		if (octave != 0) {
 			if (octave>0) {

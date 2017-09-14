@@ -4,7 +4,10 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Represents an ABC notation music file (.abc)
@@ -45,19 +48,20 @@ public class SongBuilder {
 				s = buffRead.readLine();
 			}
 			// Read the rest of the file.
-			while (buffRead.ready()) {
-				body += buffRead.readLine();
+			while (s != null) {
+				body += s;
+				s = buffRead.readLine();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		// Close the reader, freeing memory
 		closeReader();
-		
 		processHeader(song);
 		processBody(song);
+		
 
-		return song;
+		return song; 
 	}
 
 	/**
@@ -106,6 +110,15 @@ public class SongBuilder {
 	 */
 	private void processBody(Song song) {
 		//TODO build this.
+		ArrayList<Note> rawNotes = new ArrayList<Note>();
+		Pattern p = Pattern.compile(
+				"([\\^=_]?[a-gA-G][,']*|z)[\\d\\/]*");
+		Matcher m = p.matcher(body);
+		while (m.find()) {
+			rawNotes.add(new Note(m.group()));
+		}
+		song.notes = new Note[rawNotes.size()];
+		rawNotes.toArray(song.notes);
 	}
 
 	/**

@@ -32,10 +32,11 @@ public class TestSongBuilder {
 	
 	
 	/**
-	 * THIS IS NOT DONE.
+	 * Test that the header of the song is
+	 * Corectly processed.
 	 */
 	@Test
-	public void testBuildSong() {
+	public void testBuildHeader() {
 		SongBuilder sB = new SongBuilder();
 		Song s = sB.buildSong("abc files/vivaldi-spring.abc");
 		// Test header
@@ -43,8 +44,24 @@ public class TestSongBuilder {
 		assertEquals("Vivaldi", s.getComposer());
 		assertEquals("E", s.getKey());
 		assertEquals("1/8", s.getNoteLength());
-		// Test body
 		
+	}
+	
+	/**
+	 * Tests that all the notes from the .abc
+	 * file are successfully turned into notes in the Song.
+	 */
+	@Test
+	public void testBuildBody() {
+		SongBuilder sb = new SongBuilder();
+		Song s = sb.buildSong("abc files/vivaldi-spring.abc");;
+		// Test that the body
+		// contains the correct notes.
+		assertEquals(75, s.notes.length);
+		assertEquals("e", s.notes[0].toString());
+		assertEquals("g", s.notes[1].toString());
+		assertEquals("e6", s.notes[s.notes.length-2].toString());
+		assertEquals("z", s.notes[s.notes.length-1].toString());
 	}
 	
 	/**

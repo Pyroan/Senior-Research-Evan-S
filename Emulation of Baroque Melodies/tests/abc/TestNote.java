@@ -125,8 +125,16 @@ public class TestNote {
 		note.setLength(3, 1);
 		assertEquals("^g''3", note.toString());
 		
-		Note note2 = new Note("_G,/");
-		assertEquals("_G,/", note2.toString());
+		// It's funny because this makes it look like
+		// note does literally nothing.
+		note = new Note("_G,/");
+		assertEquals("_G,/", note.toString());
+		
+		note = new Note("G");
+		assertEquals("G", note.toString());
+		
+		note = new Note("z");
+		assertEquals("z", note.toString());
 	}
 
 }
