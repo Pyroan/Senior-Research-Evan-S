@@ -3,8 +3,6 @@ package abc;
 import static org.junit.Assert.*;
 
 import java.awt.Point;
-
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class TestNote {

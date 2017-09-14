@@ -37,12 +37,16 @@ public class SongBuilder {
 		// Now we know that works, attempt to create the song.
 
 		Song song = new Song();
-
+		// Reset header and body
+		header = "";
+		body = "";
 		// Creates header and body strings to prepare them
 		// for further processing.
 		try {
 			// Read the entire header.
 			String s = buffRead.readLine();
+			if (!s.matches("[A-Za-z]:.*")) 
+				return null;
 			while (s.matches("[A-Za-z]:.*")) {
 				header += s + "\n";
 				s = buffRead.readLine();
@@ -105,11 +109,10 @@ public class SongBuilder {
 	}
 
 	/**
-	 * Breaks down the body into its notes and "other stuff"
-	 * and fills the song's instance variables with their values.
+	 * Breaks down the body into its notes and ignores "other stuff"
+	 * and fills song.notes with their values.
 	 */
 	private void processBody(Song song) {
-		//TODO build this.
 		ArrayList<Note> rawNotes = new ArrayList<Note>();
 		Pattern p = Pattern.compile(
 				"([\\^=_]?[a-gA-G][,']*|z)[\\d\\/]*");

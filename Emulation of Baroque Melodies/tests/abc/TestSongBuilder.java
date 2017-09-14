@@ -2,7 +2,6 @@ package abc;
 
 import static org.junit.Assert.*;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class TestSongBuilder {
@@ -72,5 +71,12 @@ public class TestSongBuilder {
 		SongBuilder songBuilder = new SongBuilder();
 		Song s = songBuilder.buildSong("This isn't a valid path");
 		assertEquals(null, s);
+	}
+	
+	@Test
+	public void testBuildSongWrongFormat() {
+		SongBuilder songBuilder = new SongBuilder();
+		Song s = songBuilder.buildSong("abc files/wrong-format.abc");
+		assertNull(s);
 	}
 }

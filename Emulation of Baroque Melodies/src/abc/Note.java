@@ -34,7 +34,6 @@ public class Note {
 	/**
 	 * The length of a note, where units
 	 * are the default note length of the tune.
-	 * A length of -n is equal to 1/(2n)
 	 * Wait in general it's gonna be n/m
 	 * where n is 1xthe number and m is
 	 * 2xnumber of slashes?

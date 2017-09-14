@@ -7,7 +7,8 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
 	TestSongBuilder.class,
 	TestSong.class,
-	TestNote.class
+	TestNote.class,
+	TestABCWriter.class
 })
 
 public class TestABCSuite {
