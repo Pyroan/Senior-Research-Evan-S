@@ -45,19 +45,7 @@ public class Song {
 	public Song(String title, String composer, String timeSignature) {
 		this.title = title;
 		this.composer = composer;
-		this.meter[0] = timeSignature.charAt(0);
-		this.meter[1] = timeSignature.charAt(2);
-	}
-
-	/**
-	 * Constructs an existing song from the given
-	 * pathname.
-	 * @param path
-	 * FIXME this may be deprecated.
-	 */
-	public Song(String path) {
-		SongBuilder abcReader = new SongBuilder();
-		abcReader.openReader(path);
+		setMeter(timeSignature);
 	}
 
 	/****************************
@@ -112,7 +100,7 @@ public class Song {
 		if (noteLength.length() == 1) {
 			setNoteLength(Integer.parseInt(noteLength));
 		} else {
-			noteLength = noteLength.substring(2);
+			this.noteLength = Integer.parseInt(noteLength.substring(2));
 		}
 	}
 
@@ -120,10 +108,10 @@ public class Song {
 		this.noteLength = noteLength;
 	}
 
-	public void setTimeSignature(String ts) {
-		// reminder meter isn't a string anymore;
-		//meter = ts;
-	}
+//	public void setTimeSignature(String ts) {
+//		// reminder meter isn't a string anymore;
+//		//meter = ts;
+//	}
 
 	/**
 	 * Sets the meter. Assumes the string being passed to it
@@ -135,8 +123,17 @@ public class Song {
 			this.meter[0] = 4;
 			this.meter[1] = 4;
 		} else {
-			this.meter[0] = meter.charAt(0);
-			this.meter[2] = meter.charAt(0);
+			this.meter[0] = meter.charAt(0)-48;
+			this.meter[1] = meter.charAt(2)-48;
 		}
 	}
+	
+	public int[] getMeter() {
+		return meter;
+	}
+	
+	public String getMeterString() {
+		return meter[0]+"/"+meter[1];
+	}
+	
 }

@@ -87,7 +87,7 @@ public class SongBuilder {
 				break;
 			// Meter
 			case "M":
-				song.setTimeSignature(infoField[1]);
+				song.setMeter(infoField[1]);
 			// Key
 			case "K":
 				song.setKey(infoField[1]);
@@ -132,7 +132,7 @@ public class SongBuilder {
 			buffRead = new BufferedReader(fileRead);
 			return true;
 		} catch (FileNotFoundException e) {
-			System.err.println("File \"" + path + "\" was not found");
+			e.printStackTrace();
 			return false;
 		}
 	}
@@ -149,8 +149,8 @@ public class SongBuilder {
 			e.printStackTrace();
 			return false;
 		} catch (NullPointerException e) {
-			System.err.println("Tried to close null file");
-			//e.printStackTrace();
+
+			e.printStackTrace();
 			return false;
 		}
 	}
