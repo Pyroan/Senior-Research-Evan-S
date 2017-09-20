@@ -5,7 +5,8 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-	TestTuneGenerator.class
+	TestTuneGenerator.class,
+	TestNoteConverter.class
 })
 
 public class TestGASuite {
