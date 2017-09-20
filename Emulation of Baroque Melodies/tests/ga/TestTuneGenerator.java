@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import abc.ABCWriter;
 import abc.Song;
 import abc.SongBuilder;
 
@@ -14,9 +15,14 @@ public class TestTuneGenerator {
 	@Test
 	public void testCreateTune() {
 		TuneGenerator t = new TuneGenerator();
-		t.createTune("Test");
+		Song ss = t.createTune("Test");
+		ABCWriter abc = new ABCWriter();
+		abc.setDefaultDirectory("output tests");
+		abc.writeSong(ss, true);
+		abc.closeWriter();
+		
 		SongBuilder sb = new SongBuilder();
-		Song s = sb.buildSong("unnamed-test.abc");
+		Song s = sb.buildSong("output tests/unnamed-test.abc");
 		assertNotNull(s);
 	}
 

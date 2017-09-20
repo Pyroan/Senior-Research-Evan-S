@@ -11,9 +11,19 @@ import abc.Note;
  */
 public class TuneGenerator {
 	
-	public void createTune(String title) {
+	NoteConverter nc = new NoteConverter();
+	
+	public Song createTune(String title) {
 		Song s = new Song();
 		s.setTitle(title);
-		
+		// NONE OF THE FOLLOWING CAN STAY
+		Note[] thing = new Note[12];
+		thing[0] = new Note("C");
+		for (int i = 1; i < 12; i++) {
+			thing[i] = nc.numberToNote(i, "C");
+		}
+		// Stuff after here is fine tho
+		s.notes = thing;
+		return s;
 	}
 }
