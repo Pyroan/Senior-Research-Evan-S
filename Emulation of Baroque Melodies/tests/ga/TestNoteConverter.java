@@ -30,4 +30,5 @@ public class TestNoteConverter {
 		assertTrue(nc.isMinor("Cm"));
 		assertFalse(nc.isMinor("CM"));
 	}
+	
 }
