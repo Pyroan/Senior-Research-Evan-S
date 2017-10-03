@@ -51,14 +51,20 @@ public class TuneGenerator {
 		for (int i = 1; i < n; i++) {
 			// Pick a pitch.
 			double x = rng.nextGaussian();
+			
 			// the next pitch distribution 
 			// should be centered on the previous pitch.
 			x += notes[i-1]; 
+			
 			// And should have a std deviation of ???
 			x *= 1.15;
-			// Must be capped at +- 24 (for now
-			if (x > 24) x = 24;
-			if (x < -24) x = -24;
+			
+			// The value Must be capped at +- 24 (for now)
+			// "bounce" the pitch away from the max by
+			// the overshoot.
+			if (x > 24) x = 24 - (x-24);
+			if (x < -24) x = -24 + (Math.abs(x)-24);
+			
 			// For now We should never hear the same
 			// note twice in a row.
 			// to remedy this, round away from notes[i-1]

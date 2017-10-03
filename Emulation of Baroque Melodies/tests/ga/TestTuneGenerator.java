@@ -13,11 +13,10 @@ public class TestTuneGenerator {
 
 	// There isn't really a great way to test this,
 	// Other than to just make sure a tune was actually generated.
-	@Ignore
 	@Test
 	public void testCreateTune() {
 		TuneGenerator t = new TuneGenerator();
-		Song ss = t.createTune("Test");
+		Song ss = t.createTune("updated bounding");
 		ABCWriter abc = new ABCWriter();
 		abc.setDefaultDirectory("output tests");
 		abc.writeSong(ss, false);

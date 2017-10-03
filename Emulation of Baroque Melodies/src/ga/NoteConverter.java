@@ -45,8 +45,9 @@ public class NoteConverter {
 		for (int i = 0; i < notes.length; i++) {
 			for (int j = 0; j < notes[i].length; j++) {
 				if (notes[i][j].equals(key)) {
-					n = n + i; 
-					n = (n) % notes.length;
+					n = n + i;
+					n = (((n % notes.length)+notes.length)
+							%notes.length);
 				}
 			}
 		}
