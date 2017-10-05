@@ -9,6 +9,9 @@ import abc.Song;
  */
 public class TuneOptimizer {
 	
+	public static final int tournamentSize = 5;
+	
+	
 	// Essentially how long we want our code to run.
 	private int numberOfGenerations;
 
@@ -17,7 +20,16 @@ public class TuneOptimizer {
 	
 	// Select Individuals for cross over.
 	private Song tournamentSelection(Population p) {
-		return null;
+		
+		Population tournament = new Population(tournamentSize,false,null);
+		
+		for (int i = 0; i < tournamentSize; i++) {
+			int randomId = (int) (Math.random() * p.size());
+			tournament.saveSong(i, p.getSong(randomId));
+		}
+		// Get fittest member of tournament
+		Song fittest = tournament.getFittest();
+		return fittest;
 	}
 }
 

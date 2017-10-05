@@ -1,6 +1,7 @@
 package ga;
 
 import abc.Note;
+import abc.Song;
 
 /**
  * When given an array of notes,
@@ -10,7 +11,11 @@ import abc.Note;
  */
 public class TuneEvaluator {
 	
-	public double getFitness(Note[] notes) {
-		return 0.0;
+	public static int getFitness(Note[] notes) {
+		return 0;
+	}
+	
+	public static int getFitness(Song song) {
+		return getFitness(song.notes);
 	}
 }
