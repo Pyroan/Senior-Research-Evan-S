@@ -15,17 +15,17 @@ public class NoteConverter {
 	 * This is supposed to be a reference table.
 	 */
 	String[][] notes = { 
-			{"A"},
+			{"=A"},
 			{"^A", "_B"},
-			{"B", "_C"}, 
+			{"=B", "_C"}, 
 			{"^B", "C"},
 			{"^C", "_D"},
-			{"D"}, 
+			{"=D"}, 
 			{"^D", "_E"},
-			{"E", "_F"},
-			{"^E", "F"},
+			{"=E", "_F"},
+			{"^E", "=F"},
 			{"^F", "_G"},
-			{"G"},
+			{"=G"},
 			{"^G", "_A"}
 	};
 	
