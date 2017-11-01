@@ -182,4 +182,8 @@ public class Note {
 			note += length.x;
 		return note;
 	}
+	
+	public boolean isRest() {
+		return pitch == 'z';
+	}
 }

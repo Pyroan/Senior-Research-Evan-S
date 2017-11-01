@@ -15,18 +15,18 @@ public class NoteConverter {
 	 * This is supposed to be a reference table.
 	 */
 	String[][] notes = { 
-			{"=A"},
-			{"^A", "_B"},
-			{"=B", "_C"}, 
-			{"^B", "C"},
+			{"^B", "=C",  "C"},
 			{"^C", "_D"},
-			{"=D"}, 
+			{"=D",  "D"}, 
 			{"^D", "_E"},
-			{"=E", "_F"},
+			{"=E",  "E", "_F"},
 			{"^E", "=F"},
 			{"^F", "_G"},
-			{"=G"},
-			{"^G", "_A"}
+			{"=G",  "G"},
+			{"^G", "_A"},
+			{"=A",  "A"},
+			{"^A", "_B"},
+			{"=B",  "B", "_C"} 
 	};
 	
 	/**
@@ -54,6 +54,40 @@ public class NoteConverter {
 		Note note = new Note(notes[n][0]);
 		note.setOctave(octave);
 		return note;
+	}
+	
+	/**
+	 * Converts a Note to a number,
+	 * its distance in semitones from the base note.
+	 * TODO: this
+	 * @param n
+	 * @param base
+	 * @return
+	 */
+	public int noteToNumber(Note n, Note base) {
+		// Prepare strings for comparison
+		String nPitch = ""+n.getPitch(); 
+		if (n.getAccidental() != 0)
+			nPitch = n.getAccidental()+nPitch;
+		String bPitch = ""+base.getPitch();
+		if (base.getAccidental() != 0) 
+			bPitch = base.getAccidental() + bPitch;
+		int nLoc = -1;
+		int bLoc = -1;
+		// Start trying to find the notes in the array.
+		for (int i = 0; i < notes.length; i++) {
+			for (int j = 0; j < notes[i].length;j++) {
+				if (nPitch.equals(notes[i][j])) {
+					nLoc = i;
+				}
+				if (bPitch.equals(notes[i][j])) {
+					bLoc = i;
+				}
+			}
+		}
+		nLoc = nLoc + (12*n.getOctave());
+		bLoc = bLoc + (12*base.getOctave());
+		return nLoc - bLoc;
 	}
 	
 	public boolean isMinor(String key) {
