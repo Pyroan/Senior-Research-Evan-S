@@ -119,12 +119,13 @@ public class Song {
 	 * @param meter
 	 */
 	public void setMeter(String meter) {
-		if (meter == "C") {
+		if (meter.equals("C")) {
 			this.meter[0] = 4;
 			this.meter[1] = 4;
 		} else {
-			this.meter[0] = meter.charAt(0)-48;
-			this.meter[1] = meter.charAt(2)-48;
+			String[] m = meter.split("/");
+			this.meter[0] = Integer.parseInt(m[0]);
+			this.meter[1] = Integer.parseInt(m[1]);
 		}
 	}
 	

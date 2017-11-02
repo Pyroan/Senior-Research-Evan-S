@@ -21,7 +21,10 @@ public class TuneEvaluator {
 	 * since this shouldn't use default indices.
 	 */
 	private static double freqAnalysisTable[][] = new double[49][49];
-
+	
+	// The number of jumps between notes analyzed for the frequency analysis table.
+	private static int numberOfJumps = 0;
+	
 	public static int getFitness(Note[] notes) {
 		int fitness = frequencyAnalysis(notes);
 		fitness += sequenceAnalysis(notes);
@@ -80,7 +83,7 @@ public class TuneEvaluator {
 		File folder = new File(path);
 		SongBuilder sb = new SongBuilder();
 		NoteConverter nc = new NoteConverter();
-		int numberOfJumps = 0;
+		numberOfJumps = 0;
 		for (File entry : folder.listFiles()) {
 			Song s = sb.buildSong(entry.toString());
 			if (s != null) {
@@ -114,14 +117,18 @@ public class TuneEvaluator {
 	 */
 	public static void printFreqAnalysisTable() {
 		System.out.println("Probability that a jump of x follows a jump of y for [x,y]: ");
+		System.out.println("Only nonzero values shown for brevity");
+		double max = -1;
 		for (int i = -24; i <= 24; i++) {
 			for (int j = -24; j <= 24; j++) {
 				if (getFreqPrediction(i,j) != 0) {
+					if (max < getFreqPrediction(i,j)) max = getFreqPrediction(i,j);
 					System.out.println("["+j+", "+i+"]: "
 							+ getFreqPrediction(i,j));
 				}
 			}
 		}
-
+		System.out.println("Max value: " + max);
+		System.out.println("Jumps analyzed: " + numberOfJumps);
 	}
 }
