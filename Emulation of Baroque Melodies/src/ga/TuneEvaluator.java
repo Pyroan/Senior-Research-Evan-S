@@ -28,7 +28,7 @@ public class TuneEvaluator {
 	public static int getFitness(Note[] notes) {
 		int fitness = frequencyAnalysis(notes);
 		fitness += sequenceAnalysis(notes);
-
+		//System.out.println("\t Fitness: "+fitness);
 		return fitness;
 	}
 

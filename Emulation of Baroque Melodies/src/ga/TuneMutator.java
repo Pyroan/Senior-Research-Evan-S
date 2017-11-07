@@ -12,7 +12,7 @@ public class TuneMutator {
 	double mutationRate = .015;
 	double uniformRate = .5; 
 	
-	private NoteConverter nc;
+	private NoteConverter nc = new NoteConverter();
 	
 	public Song crossover(Song a, Song b, String name) {
 		Song newSong = new Song();
@@ -39,7 +39,9 @@ public class TuneMutator {
 			if (Math.random() <= mutationRate) {
 				int n = (int)Math.random() * 48 - 24;
 				Note newNote = nc.numberToNote(n, newSong.getKey());
-				a.notes[i] = newNote;
+				newSong.notes[i] = newNote;
+			} else {
+				newSong.notes[i] = a.notes[i];
 			}
 		}
 		

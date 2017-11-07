@@ -1,5 +1,7 @@
 package ga;
 
+import java.io.File;
+
 import abc.ABCWriter;
 import abc.Song;
 
@@ -52,6 +54,25 @@ public class Population {
 		}
 		return fittest;
 	}
+	
+	public int getMaxFitness() {
+		int max = -1;
+		for (int i = 0; i < individuals.length; i++) {
+			int f = TuneEvaluator.getFitness(individuals[i]);
+			if (f > max) {
+				max = f;
+			}
+		}
+		return max;
+	}
+	
+	public int getAverageFitness() {
+		int sum = 0;
+		for (Song i: individuals) {
+			sum += TuneEvaluator.getFitness(i);
+		}
+		return sum/individuals.length;
+	}
 
 	public void saveSong(int i, Song song) {
 		individuals[i] = song;
@@ -61,7 +82,9 @@ public class Population {
 		ABCWriter writer = new ABCWriter();
 		writer.setDefaultDirectory(path);
 		for (int i = 1; i < individuals.length; i++) {
-			writer.writeSong(individuals[i], false);
+			//writer.setWriter(new File(path));
+			writer.writeSong(individuals[i], true);
+			// System.out.println("Holy cow I think i wrote a song to \"" + path + "\"");
 		}
 		writer.closeWriter();
 	}

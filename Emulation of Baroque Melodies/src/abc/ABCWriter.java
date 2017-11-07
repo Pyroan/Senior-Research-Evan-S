@@ -22,15 +22,17 @@ public class ABCWriter {
 	 * to overwrite an existing file.
 	 */
 	public void writeSong(Song song, boolean overwrite) {
-		if (writer == null) {
+		//if (writer == null) {
 			File f = new File(buildFileName(song, overwrite));
 			try {
-				FileOutputStream fos = new FileOutputStream(f);
-				writer = new PrintStream(fos, true);
-			} catch (FileNotFoundException e) {
+//				f.createNewFile();
+//				FileOutputStream fos = new FileOutputStream(f);
+//				writer = new PrintStream(fos, true);
+				setWriter(f);
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
+		//}
 		writer.println("X:1"); // Just a thing ABC files require.
 		writer.println("T:"+song.getTitle());
 		writer.println("C:"+song.getComposer());
@@ -81,6 +83,11 @@ public class ABCWriter {
 			return true;
 		}
 		try {
+			//System.out.println(f.getParent()+"\t"+f.getParentFile().exists());
+
+			if (!f.getParentFile().exists())
+				f.getParentFile().mkdir();
+			f.createNewFile();
 			FileOutputStream fos = new FileOutputStream(f);
 			writer = new PrintStream(fos, true);
 			return true;
