@@ -9,7 +9,7 @@ import abc.Song;
  */
 public class TuneMutator {
 	
-	double mutationRate = .015;
+	double mutationRate = .05;
 	double uniformRate = .5;
 	// How many consecutive notes to copy
 	int phraseLength = 4;
