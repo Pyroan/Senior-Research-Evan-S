@@ -59,7 +59,6 @@ public class NoteConverter {
 	/**
 	 * Converts a Note to a number,
 	 * its distance in semitones from the base note.
-	 * TODO: this
 	 * @param n
 	 * @param base
 	 * @return

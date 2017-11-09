@@ -19,6 +19,7 @@ public class TuneOptimizer {
 
 	// The best fitness we've seen so far.
 	public int averageFitness = 0;
+	public int maxFitness = 0;
 
 	public Population pop;
 	TuneMutator t = new TuneMutator();
@@ -40,7 +41,9 @@ public class TuneOptimizer {
 
 		for (int i = 1; i <= Runner.NUM_GENERATIONS; i++) {
 			averageFitness = pop.getAverageFitness();
-			String s = "Generation: " + i + "\tAverage Fitness: " + averageFitness;
+			maxFitness = pop.getMaxFitness();
+			String s = "Generation: " + i + "\tAverage Fitness: " + averageFitness
+					+ "\tMax Fitness: " + maxFitness + "\tFittest: " + pop.getFittest().getTitle();
 			System.out.println(s);
 			if (writer != null) writer.println(i + "\t" + averageFitness);
 			pop = evolve(pop, "gen-"+i);

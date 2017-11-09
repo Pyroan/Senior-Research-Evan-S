@@ -19,9 +19,9 @@ public class TuneGenerator {
 	public Song createTune(String title) {
 		Song s = new Song();
 		s.setTitle(title);
-
-		int[] iNotes = pickNotes(32);
-		Note[] notes = new Note[32];
+		s.setNoteLength(16);
+		int[] iNotes = pickNotes(64);
+		Note[] notes = new Note[64];
 		for (int i = 0; i < iNotes.length; i++) {
 			notes[i] = nc.numberToNote(iNotes[i], "C");
 		}

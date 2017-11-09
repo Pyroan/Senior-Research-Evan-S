@@ -1,5 +1,4 @@
 package util;
-import abc.*;
 import ga.*;
 
 /**
@@ -20,11 +19,11 @@ public class Runner {
 	public static void main(String[] args) {
 		// Set up frequency analysis table
 		TuneEvaluator.generateFrequencyAnalysisTable(INPUT_FOLDER);
-		System.out.println("Finished generating freqanalysis");
+		System.out.println("Finished generating freqanalysis Table");
 		// Generate initial tunes.
 		Population p = new Population(100, true, "prelim_test");
 		p.writeToFolder(OUTPUT_FOLDER+"/Initial Population");
-		System.out.println("Songs written to folder, allegedly");
+		System.out.println("Initial Population written to folder");
 		
 		TuneOptimizer to = new TuneOptimizer();
 		to.pop = p;

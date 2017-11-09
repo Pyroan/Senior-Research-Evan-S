@@ -10,7 +10,9 @@ import abc.Song;
 public class TuneMutator {
 	
 	double mutationRate = .015;
-	double uniformRate = .5; 
+	double uniformRate = .5;
+	// How many consecutive notes to copy
+	int phraseLength = 8;
 	
 	private NoteConverter nc = new NoteConverter();
 	
@@ -19,11 +21,15 @@ public class TuneMutator {
 		newSong.setTitle(name);
 		newSong.notes = new Note[a.notes.length];
 		
-		for (int i = 0; i < a.notes.length; i++) {
+		for (int i = 0; i < a.notes.length-phraseLength+1; i+=phraseLength) {
 			if (Math.random() <= uniformRate) {
-				newSong.notes[i] = a.notes[i];
+				for (int j = i; j < i+phraseLength;j++) {
+					newSong.notes[j] = a.notes[j];
+				}
 			} else {
-				newSong.notes[i] = b.notes[i];
+				for (int j = i; j < i+phraseLength;j++) {
+					newSong.notes[j] = b.notes[j]; 
+				}
 			}
 		}
 		
@@ -37,7 +43,7 @@ public class TuneMutator {
 		
 		for (int i = 0; i < a.notes.length; i++) {
 			if (Math.random() <= mutationRate) {
-				int n = (int)Math.random() * 48 - 24;
+				int n = (int)(Math.random() * 48) - 24;
 				Note newNote = nc.numberToNote(n, newSong.getKey());
 				newSong.notes[i] = newNote;
 			} else {

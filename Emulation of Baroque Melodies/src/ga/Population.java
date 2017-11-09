@@ -48,22 +48,25 @@ public class Population {
 		int max = -1;
 		Song fittest = null;
 		for (int i = 0; i < individuals.length; i++) {
-			if (TuneEvaluator.getFitness(individuals[i]) > max) {
+			int f = TuneEvaluator.getFitness(individuals[i]);
+			if (f > max) {
 				fittest = individuals[i];
+				max = f;
 			}
 		}
 		return fittest;
 	}
 	
 	public int getMaxFitness() {
-		int max = -1;
-		for (int i = 0; i < individuals.length; i++) {
-			int f = TuneEvaluator.getFitness(individuals[i]);
-			if (f > max) {
-				max = f;
-			}
-		}
-		return max;
+//		int max = -1;
+//		for (int i = 0; i < individuals.length; i++) {
+//			int f = TuneEvaluator.getFitness(individuals[i]);
+//			if (f > max) {
+//				max = f;
+//			}
+//		}
+//		return max;
+		return TuneEvaluator.getFitness(getFittest());
 	}
 	
 	public int getAverageFitness() {
