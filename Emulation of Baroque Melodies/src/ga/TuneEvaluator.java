@@ -53,11 +53,43 @@ public class TuneEvaluator {
 
 	/**
 	 * TODO: Implement Sequence Analysis.
+	 * A higher value indicates that a longer sequence was
+	 * discovered more times.
+	 * This could probably be improved with Horspool's Algorithm
+	 * If I had more time or intelligence.
 	 * @param notes
 	 * @return
 	 */
 	private static int sequenceAnalysis(Note[] notes) {
-		return -1;
+		int max = 0;
+		boolean everMatched =false;
+		for (int i = 4; i >= 4; i--) {
+			for (int j = 0; j < notes.length-i;j++) {
+				// Create key sequence
+				Note[] sequence = new Note[i];
+				for (int z = 0; z < sequence.length; z++) {
+					sequence[z] = notes[j+z];
+				}
+				// TOO MUCH NESTINGGGGGGGG
+				for (int k = j; k < notes.length-i;k+=i) {
+					boolean matches = true;
+					for (int z = 0; z < sequence.length;z++) {
+						if (!sequence[z].toString().equals(notes[k].toString())) {
+							matches = false;
+						}
+					}
+					if (matches) {
+						everMatched =true;
+						max += 100*i;
+					}
+				}
+			}
+//			if (everMatched) {
+//				//if (i > 3) System.out.println("Found at least one size "+i);
+//				break;
+//			}
+		}
+		return max;
 	}
 	/**
 	 * Provides safe access to the frequency analysis table, adjusting indexes

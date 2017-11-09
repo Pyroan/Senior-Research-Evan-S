@@ -12,7 +12,7 @@ public class TuneMutator {
 	double mutationRate = .015;
 	double uniformRate = .5;
 	// How many consecutive notes to copy
-	int phraseLength = 8;
+	int phraseLength = 4;
 	
 	private NoteConverter nc = new NoteConverter();
 	
