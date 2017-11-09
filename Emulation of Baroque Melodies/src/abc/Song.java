@@ -88,6 +88,10 @@ public class Song {
 	public String getNoteLength() {
 		return "1/"+noteLength;
 	}
+	
+	public int getNoteLengthInt() {
+		return noteLength;
+	}
 
 	/**
 	 * Sets the note length based on a string instead

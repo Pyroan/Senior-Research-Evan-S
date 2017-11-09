@@ -37,10 +37,14 @@ public class ABCWriter {
 		writer.println("T:"+song.getTitle());
 		writer.println("C:"+song.getComposer());
 		writer.println("M:"+song.getMeterString());
-		writer.println("K:"+song.getNoteLength());
+		writer.println("L:"+song.getNoteLength());
 		for(int i=0; i < song.notes.length; i++) {
+			if ((i+1)%song.getNoteLengthInt() == 0) {
+				writer.print("| ");
+			}
 			writer.print(song.notes[i] + " ");
 		}
+		writer.print("|]");
 	}
 	
 	/**
