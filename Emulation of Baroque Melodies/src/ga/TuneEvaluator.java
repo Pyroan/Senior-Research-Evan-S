@@ -61,20 +61,22 @@ public class TuneEvaluator {
 	 * @return
 	 */
 	private static int sequenceAnalysis(Note[] notes) {
+		NoteConverter nc = new NoteConverter();
+		
 		int max = 0;
 		boolean everMatched =false;
 		for (int i = 4; i >= 4; i--) {
 			for (int j = 0; j < notes.length-i;j++) {
 				// Create key sequence
-				Note[] sequence = new Note[i];
+				int[] sequence = new int[i-1];
 				for (int z = 0; z < sequence.length; z++) {
-					sequence[z] = notes[j+z];
+					sequence[z] = nc.noteToNumber(notes[j+z+1], notes[j+z]);
 				}
 				// TOO MUCH NESTINGGGGGGGG
 				for (int k = j; k < notes.length-i;k+=i) {
 					boolean matches = true;
 					for (int z = 0; z < sequence.length;z++) {
-						if (!sequence[z].toString().equals(notes[k].toString())) {
+						if (sequence[z] != nc.noteToNumber(notes[k+1],notes[k])) {
 							matches = false;
 						}
 					}
@@ -123,7 +125,7 @@ public class TuneEvaluator {
 				numberOfJumps += n.length-2;
 				for (int i = 1; i < n.length-1;i++) {
 					if (!(n[i-1].isRest() || n[i+1].isRest() || n[i].isRest())) {
-						int prevToNow = nc.noteToNumber(n[i-1], n[i]);
+						int prevToNow = nc.noteToNumber(n[i], n[i-1]);
 						int nowToNext = nc.noteToNumber(n[i+1], n[i]);
 						try {
 						freqAnalysisTable[prevToNow+24][nowToNext+24]+=1.0;
