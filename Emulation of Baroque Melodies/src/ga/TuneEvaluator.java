@@ -57,6 +57,8 @@ public class TuneEvaluator {
 	 * discovered more times.
 	 * This could probably be improved with Horspool's Algorithm
 	 * If I had more time or intelligence.
+	 * 
+	 * Every subsequent match after the first is worth less.
 	 * @param notes
 	 * @return
 	 */
@@ -64,7 +66,7 @@ public class TuneEvaluator {
 		NoteConverter nc = new NoteConverter();
 		
 		int max = 0;
-		boolean everMatched =false;
+		int totalMatches = 0;
 		for (int i = 4; i >= 4; i--) {
 			for (int j = 0; j < notes.length-i;j++) {
 				// Create key sequence
@@ -81,8 +83,8 @@ public class TuneEvaluator {
 						}
 					}
 					if (matches) {
-						everMatched =true;
-						max += 100*i;
+						totalMatches++;
+						max += (100.0*i)/totalMatches;
 					}
 				}
 			}
