@@ -12,7 +12,7 @@ public class Runner {
 	public static final int NUM_GENERATIONS = 1000;
 
 	public static final String INPUT_FOLDER = "abc files";
-	public static final String OUTPUT_FOLDER = "output tests/prelim_test";
+	public static final String OUTPUT_FOLDER = "output tests/8Meas_Trial_10";
 
 	public static final boolean GEN_NEW_TUNES = false;
 
@@ -21,12 +21,13 @@ public class Runner {
 		TuneEvaluator.generateFrequencyAnalysisTable(INPUT_FOLDER);
 		System.out.println("Finished generating freqanalysis Table");
 		// Generate initial tunes.
-		Population p = new Population(100, true, "prelim_test");
+		Population p = new Population(100, true, "8Meas_Trial_10");
 		p.writeToFolder(OUTPUT_FOLDER+"/Initial Population");
 		System.out.println("Initial Population written to folder");
 		
 		TuneOptimizer to = new TuneOptimizer();
 		to.pop = p;
 		to.OptimizeTunes();
+		System.out.println("Trial Complete.");
 	}
 }

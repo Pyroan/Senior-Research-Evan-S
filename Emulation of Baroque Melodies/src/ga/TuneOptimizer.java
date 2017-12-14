@@ -24,7 +24,7 @@ public class TuneOptimizer {
 	public Population pop;
 	TuneMutator t = new TuneMutator();
 
-	File f = new File("FITNESS_DATA");
+	File f = new File(Runner.OUTPUT_FOLDER + "/FITNESS_DATA");
 	/**
 	 * The Big Nasty™
 	 * returns the final population of tunes.

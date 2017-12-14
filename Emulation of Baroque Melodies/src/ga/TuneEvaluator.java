@@ -167,4 +167,19 @@ public class TuneEvaluator {
 		System.out.println("Max value: " + max);
 		System.out.println("Jumps analyzed: " + numberOfJumps);
 	}
+	
+	public static void printFAAsTable() {
+		String header = "";
+		for (int i = -24; i <= 24; i++) {
+			header += i + ",";
+		}
+		System.out.println(header);
+		for (int i = -24; i <= 24; i++) {
+			String entry = i+",";
+			for (int j = -24; j <= 24; j++) {
+				entry += getFreqPrediction(i,j)+",";
+			}
+			System.out.println(entry);
+		}
+	}
 }

@@ -20,8 +20,8 @@ public class TuneGenerator {
 		Song s = new Song();
 		s.setTitle(title);
 		s.setNoteLength(16);
-		int[] iNotes = pickNotes(64);
-		Note[] notes = new Note[64];
+		int[] iNotes = pickNotes(128);
+		Note[] notes = new Note[128];
 		for (int i = 0; i < iNotes.length; i++) {
 			notes[i] = nc.numberToNote(iNotes[i], "C");
 		}

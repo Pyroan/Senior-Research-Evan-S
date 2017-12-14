@@ -16,6 +16,7 @@ public class TestTuneEvaluator {
 	public void testTableGeneration() {
 		TuneEvaluator.generateFrequencyAnalysisTable("abc files");
 		//TuneEvaluator.printFreqAnalysisTable();
+		TuneEvaluator.printFAAsTable();
 	}
 
 	@Test
