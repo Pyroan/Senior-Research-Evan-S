@@ -4,7 +4,7 @@ import abc.Note;
 
 /**
  * Converts numbers to notes, and potentially vice-versa
- * @author Evan Schoenberger
+ * @author Evan S.
  *
  */
 public class NoteConverter {
