@@ -2,7 +2,7 @@ package abc;
 
 /**
  * Represents a Song.
- * @author Evan Schoenberger
+ * @author Evan S
  *
  */
 public class Song {
