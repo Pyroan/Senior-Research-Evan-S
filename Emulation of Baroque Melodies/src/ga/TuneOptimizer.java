@@ -10,7 +10,7 @@ import util.Runner;
 /**
  * The actual GA part.
  * Given 
- * @author Evan Schoenberger
+ * @author Evan S.
  */
 public class TuneOptimizer {
 
