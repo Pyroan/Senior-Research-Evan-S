@@ -5,7 +5,7 @@ import abc.Song;
 
 /**
  * Handles crossover and mutation of tunes.
- * @author Evan Schoenberger
+ * @author Evan S.
  */
 public class TuneMutator {
 	
