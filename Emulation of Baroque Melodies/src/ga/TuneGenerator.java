@@ -10,7 +10,7 @@ import abc.Note;
 /**
  * Generates random songs using a 
  * "directed random walk" (eventually)
- * @author Evan Schoenberger
+ * @author Evan S.
  */
 public class TuneGenerator {
 	
