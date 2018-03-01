@@ -1,2 +1,2 @@
-# Senior-Research-Evan-S
-Emulation of Baroque Melodies
+# Emulation of Baroque Melodies via a Genetic Algorithm
+Project done fo my senior research.
